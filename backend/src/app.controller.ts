@@ -1,11 +1,11 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Post , Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { DocumentState } from './models/document-state.enum';
 import { LoanDocument } from './models/loan-document.entity';
 
-@Controller("main-backend")
+@Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get()
   getLoanDocuments(): LoanDocument[] {
@@ -13,8 +13,7 @@ export class AppController {
   }
 
   @Post("add")
-  addLoanDocument(document : LoanDocument){
-    document.state = DocumentState.ONREVIEW
+  addLoanDocument(@Body() document: LoanDocument) {  
     return this.appService.add(document)
   }
 }
