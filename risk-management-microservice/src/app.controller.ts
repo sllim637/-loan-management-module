@@ -14,7 +14,9 @@ export class AppController {
   @EventPattern('first_score')
   
   recieveScore(loadDocument: any) {
+      console.log("hi everyone ")
     return this.appService.handleDocument_Score(loadDocument);
+    
   }
   
 }

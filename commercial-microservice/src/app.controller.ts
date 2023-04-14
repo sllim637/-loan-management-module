@@ -15,6 +15,7 @@ export class AppController {
   @EventPattern('user_document')
   
   receiveDocument(loadDocument: LoanDocument) {
+    console.log("hello i am in commercial microservice")
     return this.appService.handleDocument(loadDocument);
   }
 }
