@@ -2,6 +2,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [ ClientsModule.register([
@@ -12,7 +13,8 @@ import { AppService } from './app.service';
         port: 3000
       }
     },
-  ]),],
+  ]),
+  HttpModule],
   controllers: [AppController],
   providers: [AppService],
 })

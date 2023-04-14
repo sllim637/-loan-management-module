@@ -1,3 +1,4 @@
+import { EventPattern } from '@nestjs/microservices';
 import { Controller, Get, Post , Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { DocumentState } from './models/document-state.enum';
@@ -15,5 +16,11 @@ export class AppController {
   @Post("add")
   addLoanDocument(@Body() document: LoanDocument) {  
     return this.appService.add(document)
+  }
+
+
+  @Post('loanResponse')
+  getLoanResponse(@Body() loadResponse : any){
+    console.log("the loan response is :" , loadResponse)
   }
 }
