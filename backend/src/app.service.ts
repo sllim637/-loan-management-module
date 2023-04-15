@@ -7,7 +7,8 @@ import { LoanDocument } from './models/loan-document.entity';
 export class AppService {
 
   private loanDocuments: LoanDocument[] = []
-
+  private acceptedLoan: any[] = []
+  private refusedLoan: any[] = []
   constructor(@Inject('COMMUNICATION') private readonly communicationClient: ClientProxy,) {
 
   }
@@ -26,4 +27,18 @@ export class AppService {
       );
     }
   }
+
+  handleFinalResponse(finalResponse: any) {
+    if (finalResponse.state === 1) {
+      this.acceptedLoan.push(finalResponse)
+    } else {
+      this.refusedLoan.push(finalResponse)
+    }
+    return finalResponse
+  }
+  getLoanByEmail(email: string) {
+    let loan = this.acceptedLoan.find(element => element.email === email)
+    return loan
+  }
 }
+
