@@ -14,8 +14,7 @@ export class AppService {
 
 
   handleDocument_Score(loanDocument: any) {
-    console.log("the received data in risk microservice is : ", loanDocument)
-    const finalScore = Math.random() + loanDocument.firstScore
+    const finalScore = (Math.random() / 2) + (loanDocument.firstScore / 2)
     let finalLoanDocument: LoanDocument = loanDocument.document
     if (finalScore > 0.5) {
       finalLoanDocument.state = DocumentState.ACCEPTED
@@ -24,7 +23,7 @@ export class AppService {
     }
     console.log("the final data is :", finalLoanDocument)
     this.communicationClient.emit("final_response", finalLoanDocument)
-      return this.httpService.post('http://localhost:3000/loanResponse', finalLoanDocument)
+    return this.httpService.post('http://localhost:3000/loanResponse', finalLoanDocument)
   }
   getHello(): string {
     return 'Hello World!';
