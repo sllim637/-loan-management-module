@@ -13,13 +13,16 @@ export class AppController {
     return this.appService.getLoanDocuments();
   }
 
-  @Get("getOne/:email")
-  getLoanByEmail(@Param('email') email: string) {
-    console.log("email : ", email)
-    const loan = this.appService.getLoanByEmail(email)
+  @Get("getOne/:id")
+  getLoanById(@Param('id') id: string) {
+    console.log("email : ", id)
+    const loan = this.appService.getLoanById(id)
     return loan
   }
-  
+  @Get("getPdf")
+  getPdf() {
+    return this.appService.getBase64OfPdf()
+  }
   @Post("add")
   addLoanDocument(@Body() document: LoanDocument) {
     return this.appService.add(document)
@@ -31,5 +34,16 @@ export class AppController {
     console.log("hello , I am storing lthis value :", loanResponse)
     return this.appService.handleFinalResponse(loanResponse)
   }
-  
+
+  @Post("download")
+  download(@Query('url') url: string) {
+    return this.appService.convertHtmlPage(url)
+  }
+
+  @Post('savePdfDocument')
+  savePdf(@Body() base64Document) {
+    console.log("the base64 received is : ", base64Document)
+    return this.appService.saveThedocumentPdf(base64Document)
+  }
+
 }

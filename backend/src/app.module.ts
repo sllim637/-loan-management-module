@@ -14,6 +14,15 @@ import { AppService } from './app.service';
         }
       },
     ]),
+    ClientsModule.register([
+      {
+        name: 'HTML_CONVERSION',
+        transport: Transport.TCP,
+        options : {
+          port : 3003
+        }
+      },
+    ]),
   ],
   controllers: [AppController],
   providers: [AppService],
